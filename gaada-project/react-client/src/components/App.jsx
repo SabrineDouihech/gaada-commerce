@@ -3,6 +3,8 @@ import Login from "./Login.jsx";
 import Signup from "./Signup.jsx";
 import Home from "./Home.jsx";
 import Profile from "./Profile.jsx"
+import Field from "./Field.jsx"
+import Basket from "./Basket.jsx"
 import axios from "axios";
 
 export default class App extends React.Component {
@@ -13,7 +15,10 @@ export default class App extends React.Component {
       items: [],
       users: [],
       view: "home",
-    };
+      user:{},
+      basket: []
+        };
+    this.changeView = this.changeView.bind(this);
     this.getItems = this.getItems.bind(this);
     this.getUsers = this.getUsers.bind(this);
   }
@@ -42,22 +47,42 @@ export default class App extends React.Component {
   }
 
   changeView(option) {
-    this.setState({
-      view: option,
-    });
+   
+
+    // axios.get(`/api/user/${this.state.user._id}`)
+    // .then((res) => {
+    //   this.setState({
+    //     user: res.data
+    //   });
+    //   console.log('----gett', this.state.user)
+    // })
+    // .then((res)=>{
+      this.setState({
+        view: option,
+      });
+    // })
+    // .catch((err)=>{
+    //   console.log(err)
+    // })
   }
 
   renderView() {
-    const { view, items } = this.state;
+    const { view, items,basket } = this.state;
 
     if (view === "home") {
-      return <Home items={items}/>;
+      return <Home items={items} changeView={this.changeView} basket={basket}/>;
     } else if (view === "login") {
-      return <Login updateView={()=> this.changeView('profile')} />;
+      return <Login />;
     } else if (view === "sign up") {
-      return <Signup updateView={()=> this.changeView('profile')} />;
-    } else if (view === 'profile') {
-      return <Profile />
+      return <Signup handleChange={()=> this.changeView('field')} />;
+    }
+    else if (view === "field"){
+      return <Field  changeView={this.changeView} user={this.state.user}/>;
+    }
+    else if (view === "profil"){
+      return <Profile users={this.state.users}/>
+    }else{
+     return <Basket basket={this.state.basket}/>
     }
   }
 
@@ -71,6 +96,10 @@ export default class App extends React.Component {
           className="logo"
           style={{cursor:"pointer"}}
           onClick={() => this.changeView("home")}> Ga3da commerce </span>
+            {/* <span>
+              <input type="text" />
+              <button>search</button>
+            </span> */}
           <span
             className={
               this.state.view === "home" ? "nav-selected" : "nav-unselected"
@@ -85,8 +114,8 @@ export default class App extends React.Component {
             className="nav-unselected"
             style={{cursor:"pointer"}}
             onClick={() => this.changeView("sign up")}> Sign up </span>
-        </div>
-        <div className="main">
+            </div>
+        <div>
           {this.renderView()}
         </div>
       </div>
