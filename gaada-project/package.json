@@ -6,8 +6,8 @@
   "scripts": {
     "react": "webpack -d --watch",
     "server": "nodemon server/index.js",
-    "users": "node db/userSeed.js ",
-    "items": "node db/itemSeed.js "
+    "users": "node database/userSeed.js ",
+    "items": "node database/itemSeed.js "
   },
   "author": "Beth Johnson",
   "license": "ISC",

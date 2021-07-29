@@ -3,16 +3,17 @@ import axios from 'axios';
 
 
 const Login=(props)=>{
-console.log(props, "props login");
-    const [username, setUsername] = useState("");
+    console.log(props, "props login");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const [loggedin, setLoggedin] = useState(false);
+    
     const login = ()=>{
-        axios.get('/login', {username, password}).then(result=>{
-            if (result.data.length > 0) {
-            props.updateView();
-            console.log(`welcome ${username}`);
-            } else alert("wrong username/password !")
+        axios.get('/login', {email, password}).then(result=>{
+            console.log(result.data);
+            // if (result.data.length > 0) {
+            // props.updateView();
+            // } else alert("wrong username/password !")
             }).catch(err=>{
             console.log(err);
         })
@@ -25,15 +26,11 @@ console.log(props, "props login");
                 <br />
                 <label id="emailLabel"> Email </label> <br />
                 <input id="emailInput" type="text" placeholder="email@example.com" 
-                onChange={(e)=>{
-                    setUsername(e.target.value)
-                }} />
+                onChange={(e)=>{ setEmail(e.target.value)}} />
                 <br />
                 <label id="passwordLabel"> Password </label> <br />
                 <input id="passwordInput" type="password" placeholder="enter your password"
-                onChange={(e)=>{
-                    setPassword(e.target.value)
-                }} />
+                onChange={(e)=>{ setPassword(e.target.value)}} />
                 <br />
                 <button id="loginBtn" 
                 type='submit'

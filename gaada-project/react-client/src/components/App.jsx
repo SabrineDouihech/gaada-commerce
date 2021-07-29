@@ -2,7 +2,7 @@ import React from "react";
 import Login from "./Login.jsx";
 import Signup from "./Signup.jsx";
 import Home from "./Home.jsx";
-import Profile from "./Profile.jsx"
+import Profile from "./Profile.jsx";
 import axios from "axios";
 
 export default class App extends React.Component {
@@ -48,16 +48,16 @@ export default class App extends React.Component {
   }
 
   renderView() {
-    const { view, items } = this.state;
+    const { view, items, users } = this.state;
 
     if (view === "home") {
       return <Home items={items}/>;
     } else if (view === "login") {
-      return <Login updateView={()=> this.changeView('profile')} />;
+      return <Login items={items} users={users} updateView={()=> this.changeView('profile')} />;
     } else if (view === "sign up") {
-      return <Signup updateView={()=> this.changeView('profile')} />;
+      return <Signup items={items} users={users} updateView={()=> this.changeView('profile')} />;
     } else if (view === 'profile') {
-      return <Profile />
+      return <Profile items={items} users={users} />
     }
   }
 

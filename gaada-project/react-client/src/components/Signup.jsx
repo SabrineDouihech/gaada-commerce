@@ -5,12 +5,15 @@ const Signup=(props)=>{
 console.log(props, 'props signup');
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [loggedin, setLoggedin] = useState(false);
+
     const [email, setEmail] = useState("");
 
     const signup = ()=>{
-        axios.post('/signup', { username, password, email}).then(result=>
-            props.updateView
-        )
+        axios.post('/signup', { username, password, email})
+        .then(result=>
+            console.log(result) 
+        ).catch(err=>{console.log(err);})
     }
 
     return(
@@ -42,7 +45,8 @@ console.log(props, 'props signup');
                 <br />
                 <button id="signUpBtn"  
                 type='submit'
-                onClick={signup()}
+                // onClick={(e)=>{e.preventDefault()}}à
+                onSubmit={signup}
                 >Sign Up</button>
             </form>
         </div>
