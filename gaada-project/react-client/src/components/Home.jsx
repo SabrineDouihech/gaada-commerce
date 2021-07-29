@@ -7,9 +7,9 @@ class Home extends React.Component  {
   render(){
   return (
     <div className="container">
-      {/* {console.log('------------',this.props.items)} */}
+      {/* {console.log('------------',this.props.changeView)} */}
       {this.props.items.map((item, index) => (
-        <ItemDetails item={item} key={index} />
+        <ItemDetails item={item} key={index} changeView={this.props.changeView} basket={this.props.basket} />
       ))}
     </div>
   );

@@ -8,9 +8,8 @@ console.log(props, 'props signup');
     const [email, setEmail] = useState("");
 
     const signup = ()=>{
-        axios.post('/signup', { username, password, email}).then(result=>
-            props.updateView
-        )
+        axios.post('/signup', { username, password, email}).then(result=>{
+        })
     }
 
     return(
@@ -41,8 +40,10 @@ console.log(props, 'props signup');
                 <br />
                 <br />
                 <button id="signUpBtn"  
-                type='submit'
-                onClick={signup()}
+                onClick={(e)=>{
+                    signup()
+                }}
+                onClick={props.handleChange}
                 >Sign Up</button>
             </form>
         </div>
