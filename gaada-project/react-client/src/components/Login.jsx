@@ -3,20 +3,23 @@ import axios from 'axios';
 
 
 const Login=(props)=>{
-    console.log(props, "props login");
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loggedin, setLoggedin] = useState(false);
     
     const login = ()=>{
-        axios.get('/login', {email, password}).then(result=>{
-            console.log(result.data);
-            // if (result.data.length > 0) {
-            // props.updateView();
-            // } else alert("wrong username/password !")
-            }).catch(err=>{
-            console.log(err);
-        })
+        
+        axios.get('/login', {email, password}).then((response)=>{
+            console.log(response);
+            if (response.data.length > 0) {
+            //   props.updateView();
+              console.log('logged in');
+            }
+          })
+            .catch((error)=>{
+              if (error) { alert('Wrong password/username !'); } 
+            });
     }
 
     return(
@@ -34,8 +37,13 @@ const Login=(props)=>{
                 <br />
                 <button id="loginBtn" 
                 type='submit'
-                onClick={login}
+                onClick={(e)=>{
+                    e.preventDefault();
+                    login()
+                }}
+                onClick={props.updateView}
                 > Login </button>
+                <button onClick={props.goBack} >Exit</button>
                 <br />
                 <br />
                 <h6>forgot password? </h6>

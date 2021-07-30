@@ -13,7 +13,9 @@ console.log(props, 'props signup');
         axios.post('/signup', { username, password, email})
         .then(result=>
             console.log(result) 
-        ).catch(err=>{console.log(err);})
+        ).catch(err=>{
+            console.log(err);
+        })
     }
 
     return(
@@ -45,9 +47,12 @@ console.log(props, 'props signup');
                 <br />
                 <button id="signUpBtn"  
                 type='submit'
-                // onClick={(e)=>{e.preventDefault()}}à
-                onSubmit={signup}
+                onClick={(e)=>{
+                    signup()
+                }}
+                onClick={props.updateView}
                 >Sign Up</button>
+                <button onClick={props.goBack} >Exit</button>
             </form>
         </div>
     )
