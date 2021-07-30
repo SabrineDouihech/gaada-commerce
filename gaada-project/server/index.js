@@ -4,12 +4,16 @@ var db = require("../database");
 var port = 3001
 var app = express();
 
+const jwt = require('jsonwebtoken');
+const bcrypt = require("bcrypt");
+
 const Item = require('../database/item.js')
 const User = require('../database/user.js')
 
 app.use(express.json())
 app.use(express.static(__dirname + "/../react-client/dist"));
 app.use(express.urlencoded({ extended: true }));
+
 
 app.get('/items', (req, res)=>{
   Item.find({}, function(err, result){
@@ -45,6 +49,8 @@ app.post('/signup', function(req, res){
     }
   })
 })
+
+
 
 app.post('/api/item', async (req, res) =>{
   try{
@@ -91,6 +97,19 @@ res.send(item)
   catch(err){
     console.log(err)
   }
+})
+
+
+
+
+app.get('/items/:type', (req, res)=>{
+  Item.find({itemType: req.params.type}, (err, result)=>{
+    if(err){
+      res.status(400).send()
+    } else {
+      res.send(result)
+    }
+  })
 })
 
 

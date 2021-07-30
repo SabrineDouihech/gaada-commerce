@@ -1,21 +1,21 @@
 import React, {useState} from 'react';
-import axios from 'axios';
-
+import Profile from './Profile.jsx';
 
 const Login=(props)=>{
-console.log(props, "props login");
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    // console.log(props.users, "users login");
 
-    const login = ()=>{
-        axios.get('/login', {username, password}).then(result=>{
-            if (result.data.length > 0) {
-            props.updateView();
-            console.log(`welcome ${username}`);
-            } else alert("wrong username/password !")
-            }).catch(err=>{
-            console.log(err);
-        })
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [user, setUser] = useState({});
+  
+
+    const login = (e)=>{
+        e.preventDefault();
+     props.users.map(ele => {
+         if(ele.password === password && ele.email === email) {
+             console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+         } else {console.log("wrong password/email !")}
+     })
     }
 
     return(
@@ -25,21 +25,16 @@ console.log(props, "props login");
                 <br />
                 <label id="emailLabel"> Email </label> <br />
                 <input id="emailInput" type="text" placeholder="email@example.com" 
-                onChange={(e)=>{
-                    setUsername(e.target.value)
-                }} />
+                onChange={(e)=>{ setEmail(e.target.value)}} />
                 <br />
                 <label id="passwordLabel"> Password </label> <br />
                 <input id="passwordInput" type="password" placeholder="enter your password"
-                onChange={(e)=>{
-                    setPassword(e.target.value)
-                }} />
+                onChange={(e)=>{ setPassword(e.target.value)}} />
                 <br />
                 <button id="loginBtn" 
-                type='submit'
                 onClick={login}
-                onClick={props.handleChange}
                 > Login </button>
+                <button onClick={props.goBack} >Exit</button>
                 <br />
                 <br />
                 <h6>forgot password? </h6>

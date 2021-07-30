@@ -66,16 +66,27 @@ add(){
 render(){
     return(
         <div>
+            <label placeholder="Item name" >Item name</label> <br />
             <input text='text' onChange={(e)=>this.handleName(e)} />
+            <br />
+            <label placeholder="Item descrition" >Item descrition</label> <br />
             <input text='text' onChange={(e)=>this.handleDesc(e)}/>
+            <br />
+            <label placeholder="Item type" >Item type</label> <br />
             <input text='text' onChange={(e)=>this.handleType(e)}/>
+            <br />
+            <label placeholder="Item picture" >Item picture</label> <br />
             <input text='text' onChange={(e)=>this.handleImg(e)}/>
+            <br />
+            <label placeholder="Item price" >Item price</label> <br />
             <input text='text' onChange={(e)=>this.handlePrc(e)}/>
-            <input text='text' onChange={(e)=>this.handleQntt(e)}/>
+            <br />
+            <label placeholder="Item quantity" >Item quantity</label> <br />
+            <input text='number' onChange={(e)=>this.handleQntt(e)}/>
+            <br />
             <button onClick={()=>this.add()}>Add it</button>
             <button onClick={()=>this.add()}>Update</button>
          <div>
-             {/* {console.log('heyyyyyyyyyyy',this.state.items)} */}
          </div>
         </div>
     )
