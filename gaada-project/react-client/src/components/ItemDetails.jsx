@@ -20,7 +20,7 @@ this.props.changeView('basket')
   return (
     <div className="card">
 
-      <img calssname="card-image" src={this.props.item.imageUrl} alt="item image" />
+      <img className="card-image" src={this.props.item.imageUrl} alt="item image" />
       
       <div className="card-itemDetails">
           <h3>{this.props.item.itemName}</h3>

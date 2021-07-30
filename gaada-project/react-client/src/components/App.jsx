@@ -72,7 +72,7 @@ export default class App extends React.Component {
     if (view === "home") {
       return <Home items={items} changeView={this.changeView} basket={basket}/>;
     } else if (view === "login") {
-      return <Login />;
+      return <Login handleChange={()=> this.changeView('field')}/>;
     } else if (view === "sign up") {
       return <Signup handleChange={()=> this.changeView('field')} />;
     }
@@ -80,7 +80,7 @@ export default class App extends React.Component {
       return <Field  changeView={this.changeView} user={this.state.user}/>;
     }
     else if (view === "profil"){
-      return <Profile users={this.state.users}/>
+      return <Profile users={this.state.users} items={this.state.items} />
     }else{
      return <Basket basket={this.state.basket}/>
     }

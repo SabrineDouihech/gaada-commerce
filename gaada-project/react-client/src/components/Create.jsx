@@ -54,25 +54,14 @@ handleQntt(e){
 }
 
 add(){
-
     axios.post('/api/item', this.state)
     .then((res)=>{
-//  var arr = this.state.items.push(res.data)
-// this.setState({
-//     items: this.state.items.push(res.data)
-// })
-        
-        // console.log('heyyyyyyyyyyy',this.state.items)
-
         console.log(res)
         location.reload()
     })
-    
-        // this.setState({
-        //     items : arr
-        // })
-
 }
+
+
 
 render(){
     return(
@@ -84,6 +73,7 @@ render(){
             <input text='text' onChange={(e)=>this.handlePrc(e)}/>
             <input text='text' onChange={(e)=>this.handleQntt(e)}/>
             <button onClick={()=>this.add()}>Add it</button>
+            <button onClick={()=>this.add()}>Update</button>
          <div>
              {/* {console.log('heyyyyyyyyyyy',this.state.items)} */}
          </div>
