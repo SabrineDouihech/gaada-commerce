@@ -1,30 +1,14 @@
 var express = require("express");
 var db = require("../database");
-var session = require("express-session");
-const bcrypt = require("bcrypt");
-const saltRounds =10;
-const myPlaintextPassword = 's0/\/\P4$$w0rD';
-const someOtherPlaintextPassword = 'not_bacon';
-
-bcrypt.genSalt(saltRounds, function(err, salt){
-  bcrypt.hash(myPlaintextPassword, salt, function(err, hash){
-    
-  })
-})
 
 var port = 3001
 var app = express();
 
+const jwt = require('jsonwebtoken');
+const bcrypt = require("bcrypt");
+
 const Item = require('../database/item.js')
 const User = require('../database/user.js')
-
-app.set('trust proxy', 1) 
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
-}))
 
 app.use(express.json())
 app.use(express.static(__dirname + "/../react-client/dist"));
@@ -66,19 +50,7 @@ app.post('/signup', function(req, res){
   })
 })
 
-app.get('/login', (req, res)=>{
-  User.find(
-    {email: req.body.email,
-     password: req.body.password
-    }, 
-    function(err, result){
-    if(err){
-      res.status(400).send()
-    } else {
-      res.send(result)
-    }
-  })
-})
+
 
 app.post('/api/item', async (req, res) =>{
   try{

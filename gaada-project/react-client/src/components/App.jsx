@@ -3,6 +3,8 @@ import Login from "./Login.jsx";
 import Signup from "./Signup.jsx";
 import Home from "./Home.jsx";
 import Profile from "./Profile.jsx";
+import Field from "./Field.jsx";
+import Basket from "./Basket.jsx";
 import axios from "axios";
 
 export default class App extends React.Component {
@@ -14,8 +16,8 @@ export default class App extends React.Component {
       users: [],
       view: "home",
       user:{},
-      basket: []
-        };
+      basket: [],
+      };
     this.changeView = this.changeView.bind(this);
     this.getItems = this.getItems.bind(this);
     this.getUsers = this.getUsers.bind(this);
@@ -44,37 +46,28 @@ export default class App extends React.Component {
     })
   }
 
-  changeView(option) {
-   
 
-    // axios.get(`/api/user/${this.state.user._id}`)
-    // .then((res) => {
-    //   this.setState({
-    //     user: res.data
-    //   });
-    //   console.log('----gett', this.state.user)
-    // })
-    // .then((res)=>{
+  changeView(option) {
       this.setState({
         view: option,
       });
-    // })
-    // .catch((err)=>{
-    //   console.log(err)
-    // })
   }
 
   renderView() {
-    const { view, items, users, basket } = this.state;
+    const { view, items, users, basket, user } = this.state;
 
     if (view === "home") {
-      return <Home items={items} changeView={this.changeView} basket={basket}/>;
+      return <Home items={items} basket={basket} changeView={this.changeView} />;
     } else if (view === "login") {
-      return <Login items={items} users={users} updateView={()=> this.changeView('profile')} goBack={()=> this.changeView('home')} />;
+      return <Login users={users} handleChange={()=>{this.changeView('profile')}} />;
     } else if (view === "sign up") {
-      return <Signup items={items} users={users} updateView={()=> this.changeView('profile')} goBack={()=> this.changeView('home')} />;
-    } else if (view === 'profile') {
-      return <Profile items={items} users={users} />
+      return <Signup handleChange={()=>{this.changeView('field')}}  />;
+    } else if (view === "field"){
+      return <Field  changeView={this.changeView} user={user}/>;
+    } else if (view === "profil"){
+      return <Profile users={users} items={items} />
+    } else{
+     return <Basket basket={basket}/>
     }
   }
 

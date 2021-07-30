@@ -1,25 +1,21 @@
 import React, {useState} from 'react';
-import axios from 'axios';
-
+import Profile from './Profile.jsx';
 
 const Login=(props)=>{
+    // console.log(props.users, "users login");
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loggedin, setLoggedin] = useState(false);
-    
-    const login = ()=>{
-        
-        axios.get('/login', {email, password}).then((response)=>{
-            console.log(response);
-            if (response.data.length > 0) {
-            //   props.updateView();
-              console.log('logged in');
-            }
-          })
-            .catch((error)=>{
-              if (error) { alert('Wrong password/username !'); } 
-            });
+    const [user, setUser] = useState({});
+  
+
+    const login = (e)=>{
+        e.preventDefault();
+     props.users.map(ele => {
+         if(ele.password === password && ele.email === email) {
+             console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+         } else {console.log("wrong password/email !")}
+     })
     }
 
     return(
@@ -36,12 +32,7 @@ const Login=(props)=>{
                 onChange={(e)=>{ setPassword(e.target.value)}} />
                 <br />
                 <button id="loginBtn" 
-                type='submit'
-                onClick={(e)=>{
-                    e.preventDefault();
-                    login()
-                }}
-                onClick={props.updateView}
+                onClick={login}
                 > Login </button>
                 <button onClick={props.goBack} >Exit</button>
                 <br />

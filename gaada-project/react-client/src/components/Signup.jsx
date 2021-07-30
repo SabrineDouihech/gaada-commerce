@@ -2,20 +2,25 @@ import React, {useState} from 'react';
 import axios from 'axios';
 
 const Signup=(props)=>{
-console.log(props, 'props signup');
+// console.log(props, 'props signup');
     const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [user, setUser] = useState({});
     const [loggedin, setLoggedin] = useState(false);
 
-    const [email, setEmail] = useState("");
 
-    const signup = ()=>{
-        axios.post('/signup', { username, password, email})
-        .then(result=>
-            console.log(result) 
-        ).catch(err=>{
-            console.log(err);
-        })
+    const signup = (e)=>{
+        e.preventDefault();
+        axios
+          .post("/signup", {
+            username,
+            password,
+            email
+          })
+          .then(response => {
+            console.log(response);
+          });
     }
 
     return(
@@ -47,10 +52,8 @@ console.log(props, 'props signup');
                 <br />
                 <button id="signUpBtn"  
                 type='submit'
-                onClick={(e)=>{
-                    signup()
-                }}
-                onClick={props.updateView}
+                // onClick={signup}
+                onClick={signup}
                 >Sign Up</button>
                 <button onClick={props.goBack} >Exit</button>
             </form>

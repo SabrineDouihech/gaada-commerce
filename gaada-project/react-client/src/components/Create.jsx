@@ -54,13 +54,14 @@ handleQntt(e){
 }
 
 add(){
-
     axios.post('/api/item', this.state)
     .then((res)=>{
         console.log(res)
         location.reload()
     })
 }
+
+
 
 render(){
     return(
@@ -84,6 +85,7 @@ render(){
             <input text='number' onChange={(e)=>this.handleQntt(e)}/>
             <br />
             <button onClick={()=>this.add()}>Add it</button>
+            <button onClick={()=>this.add()}>Update</button>
          <div>
          </div>
         </div>
