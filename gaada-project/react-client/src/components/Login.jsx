@@ -38,6 +38,7 @@ console.log(props, "props login");
                 <button id="loginBtn" 
                 type='submit'
                 onClick={login}
+                onClick={props.handleChange}
                 > Login </button>
                 <br />
                 <br />
