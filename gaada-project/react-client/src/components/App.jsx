@@ -5,6 +5,7 @@ import Home from "./Home.jsx";
 import Profile from "./Profile.jsx";
 import Field from "./Field.jsx";
 import Basket from "./Basket.jsx";
+import Search from "./Search.jsx";  
 import axios from "axios";
 
 export default class App extends React.Component {
@@ -61,6 +62,8 @@ export default class App extends React.Component {
   disconnect() {
     axios.get('/user/disconnect').then(() =>{
       this.setState({user : null})
+    }).then(() =>{
+      this.changeView('home')
     })
   }
 
@@ -83,7 +86,7 @@ export default class App extends React.Component {
     const { view, items, users, basket, user } = this.state;
 
     if (view === "home") {
-      return <Home changeView={this.changeView} filteredItems={filteredItems} basket={basket}  />;
+      return <Home changeView={this.changeView} items={items}  />;
     } else if (view === "login") {
       return <Login changeView={this.changeView}  />;
     } else if (view === "sign up") {
@@ -92,7 +95,9 @@ export default class App extends React.Component {
       return <Field  changeView={this.changeView} user={user}/>;
     } else if (view === "profile" && user !== null){
       return <Profile changeView={this.changeView} user={user} items={items} disconnect={this.disconnect} />;
-    } else{
+    } else if (view === "search") {
+      return <Search changeView={this.changeView} filteredItems={filteredItems} basket={basket}/>
+    } else {
      return <Basket basket={basket}/>
     }
   }
@@ -108,7 +113,7 @@ export default class App extends React.Component {
           style={{cursor:"pointer"}}
           onClick={() => this.changeView("home")}> Ga3da commerce </span>
           <span>
-              <input type="text" value="submit" placeholder="Search..." 
+              <input onClick={() => this.changeView("search")} type="text" value="submit" placeholder="Search..." 
               onChange={this.handleChange} 
               value={this.state.searchType}/>
             </span>

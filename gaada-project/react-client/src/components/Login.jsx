@@ -16,7 +16,7 @@ const Login=(props)=>{
         .then(() => {
             props.changeView('field')
         }).catch(err => {
-            console.log(err, "wrong pasword/username!");
+            alert( "wrong pasword/username!");
         })
     }
 
