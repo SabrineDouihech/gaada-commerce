@@ -7,6 +7,7 @@ import Field from "./Field.jsx";
 import Basket from "./Basket.jsx";
 import axios from "axios";
 
+
 export default class App extends React.Component {
   
   constructor(props) {
@@ -17,10 +18,18 @@ export default class App extends React.Component {
       view: "home",
       user:{},
       basket: [],
+      serachType:"",
       };
     this.changeView = this.changeView.bind(this);
     this.getItems = this.getItems.bind(this);
     this.getUsers = this.getUsers.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    
+  }
+
+
+  handleChange(e){
+    this.setState({searchType: e.target.value})
   }
 
   componentDidMount() {
@@ -37,6 +46,7 @@ export default class App extends React.Component {
     })
     
   }
+
   getItems() {
     axios.get("/items").then((res) => {
       this.setState({ items: res.data });
@@ -53,11 +63,21 @@ export default class App extends React.Component {
       });
   }
 
+// filtered(){
+  
+// }
+  
+
   renderView() {
+
+    const filteredItems = this.state.items.filter((item)=>{
+      return item.itemType.includes(this.state.searchType);
+    })
+//console.log(filteredItems)
     const { view, items, users, basket, user } = this.state;
 
     if (view === "home") {
-      return <Home items={items} basket={basket} changeView={this.changeView} />;
+      return <Home filteredItems={filteredItems} basket={basket} changeView={this.changeView} />;
     } else if (view === "login") {
       return <Login users={users} handleChange={()=>{this.changeView('profile')}} />;
     } else if (view === "sign up") {
@@ -81,10 +101,10 @@ export default class App extends React.Component {
           className="logo"
           style={{cursor:"pointer"}}
           onClick={() => this.changeView("home")}> Ga3da commerce </span>
-            {/* <span>
-              <input type="text" />
-              <button>search</button>
-            </span> */}
+            <span>
+              <input type="text" placeholder="Search..." onChange={this.handleChange} value={this.state.searchType}/>
+              
+            </span>
           <span
             className={
               this.state.view === "home" ? "nav-selected" : "nav-unselected"
