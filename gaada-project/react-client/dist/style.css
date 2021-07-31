@@ -1,4 +1,250 @@
+@charset "UTF-8";
 @import url('https://fonts.googleapis.com/css?family=Francois+One|PT+Serif:400,400i,700,700i');
+@import url(https://fonts.googleapis.com/css?family=Oswald:400,700);
+@import url(https://fonts.googleapis.com/css?family=Nunito:400,700);
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap");
+
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "VT323", monospace;
+  color: #1f1f1f;
+}
+
+.container {
+  background: #f1f1f1;
+  padding: 20px 10px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.center {
+  text-align: center;
+}
+
+.receipt {
+  width: 300px;
+  min-height: 100vh;
+  height: 100%;
+  background: #fff;
+  margin: 0 auto;
+  box-shadow: 5px 5px 19px #ccc;
+  padding: 10px;
+}
+
+.logo1 {
+  text-align: center;
+  padding: 20px;
+}
+
+.barcode {
+  font-family: "Libre Barcode 128", cursive;
+  font-size: 39px;
+  text-align: center;
+}
+
+.address {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.transactionDetails {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 10px 10px;
+}
+.transactionDetails .detail {
+  text-transform: uppercase;
+}
+
+.centerItem {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.survey {
+  text-align: center;
+  margin-bottom: 12px;
+}
+.survey .surveyID {
+  font-size: 20px;
+}
+
+.paymentDetails {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 150px;
+}
+
+.creditDetails {
+  margin: 10px auto;
+  width: 230px;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.receiptBarcode {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.returnPolicy {
+  margin: 10px 20px;
+  width: 220px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.coupons {
+  margin-top: 20px;
+}
+
+.tripSummary {
+  margin: auto;
+  width: 255px;
+}
+.tripSummary .item {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  width: 220px;
+}
+
+.feedback {
+  margin: 20px auto;
+}
+.feedback h3.clickBait {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0;
+}
+.feedback h4.web {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0;
+}
+.feedback .break {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.couponContainer {
+  border-top: 1px dashed #1f1f1f;
+  margin-bottom: 20px;
+}
+.couponContainer .discount {
+  font-size: 35px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.couponContainer .discountDetails {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+.couponContainer .barcode {
+  margin: 10px 0 0;
+}
+.couponContainer .legal {
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+.couponContainer .barcodeID {
+  margin-bottom: 8px;
+}
+.couponContainer .expiration {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+.couponContainer .couponBottom {
+  font-size: 13px;
+  text-align: center;
+}
+
+
+
+.button-os{
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 0 8px rgb(207, 207, 207);
+}
+
+.button-os:hover{
+  border: none;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: inset 0 0 8px #f9f8fc;
+  } 
+
+ #foot{
+  position: relative;
+  top: 15px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: none;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 0 8px #d9d4e7;
+  width: 150px;
+  height: 65px;
+  background-color: #d9d4e7;
+  animation-duration: 5s;
+}
+
+.button-os{
+   position: absolute;
+    width: 200px;
+    height: 65px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: #f9f8fc;
+    border: 2.5px solid #0e172c;
+    transition: background-color 2.2s;
+    transition-duration: 3s;
+    transition: 1.5s;
+  }
+  
+  .button-os:hover{
+    position: absolute;
+    top: 30px;
+    background-color: #fec7d7;
+  }
+  
+  .button-os a{
+    font-size: 20px;
+    display: block;
+    text-decoration: none;
+    color:#0e172c;
+    transition: 1.5s;
+  }
+  
+  .button-os a:hover{
+    letter-spacing: 5px;
+  }
+
 
 body {
   font-family: 'PT Serif', sans-serif;
@@ -6,7 +252,10 @@ body {
   color: #2C3E50;
   background-color: #ECF0F1;
   font-size: 1.1em;
+
 }
+
+
 
 h2 {
   color: #2C3E50;
@@ -241,4 +490,203 @@ button {
 
 .feed {
   padding: 0px 10% 0px 10%;
+}
+
+
+
+.actions{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+  .cartbutton{
+    position:relative;
+  }
+  .cartbutton::after {
+      content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-image: linear-gradient(90deg, #489be2, #0f629c);
+    border-radius: 50%;
+    position: absolute;
+    top: 11px;
+    right: 8px;
+}
+  
+  .cartbutton svg {
+    color: #ababab73;
+}
+   .cartbutton{
+    
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+
+  
+ .container1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 40px 0;
+}
+
+ .container1 .card1 {
+  position: relative;
+  min-width: 320px;
+  height: 440px;
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
+    inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+    5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  margin: 30px;
+  transition: 0.5s;
+}
+
+ .container1 .card1:nth-child(1) .box1 .content1 a {
+  background: #2196f3;
+}
+
+ .container1 .card1:nth-child(2) .box1 .content1 a {
+  background: #e91e63;
+}
+
+ .container1 .card1:nth-child(3) .box1 .content1 a {
+  background: #23c186;
+}
+
+ .container1 .card1 .box1 {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  background: #2a2b2f;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+ .container1 .card1 .box1:hover {
+  transform: translateY(-50px);
+}
+
+ .container1 .card1 .box1:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+ .container1 .card1 .box1 .content1 {
+  padding: 20px;
+  text-align: center;
+}
+
+ .container1 .card1 .box1 .content1 h2 {
+  position: absolute;
+  top: -10px;
+  right: 30px;
+  font-size: 8rem;
+  color: rgba(247, 242, 242, 0.815);
+}
+
+ .container1 .card1 .box1 .content1 h3 {
+  font-size: 1.8rem;
+  color: #fff;
+  z-index: 1;
+  transition: 0.5s;
+  margin-bottom: 15px;
+}
+
+ .container1 .card1 .box1 .content1 p {
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+  z-index: 1;
+  transition: 0.5s;
+}
+
+ .container1 .card1 .box1 .content1 a {
+  position: relative;
+  display: inline-block;
+  padding: 8px 20px;
+  background: black;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  margin-top: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: 0.5s;
+}
+ .container1 .card1 .box1 .content1 a:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+  background: #fff;
+  color: rgb(209, 203, 203);
+}
+
+.card-image1{
+  max-width:100%;
+    height:auto;
+}
+
+.card-image2{
+  max-width:20%;
+    height:auto;
+    border-radius: 39%;
+}
+
+
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  font-size: 62,5%;
+}
+
+
+
+.form__label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  margin-left: 2rem;
+  margin-top: 0.7rem;
+  display: block;
+  transition: all 0.3s;
+  transform: translateY(0rem);
+}
+
+.form__input {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  font-size: 1.2rem;
+	margin: 0 auto;
+  padding: 1.5rem 2rem;
+  border-radius: 0.2rem;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  width: 60%;
+  display: block;
+  border-bottom: 0.3rem solid transparent;
+  transition: all 0.3s;
+}
+
+.form__input:placeholder-shown + .form__label {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: translateY(-4rem);
+  transform: translateY(-4rem);
 }

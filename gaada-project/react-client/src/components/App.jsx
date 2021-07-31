@@ -6,6 +6,7 @@ import Profile from "./Profile.jsx";
 import Field from "./Field.jsx";
 import Basket from "./Basket.jsx";
 import Search from "./Search.jsx";  
+import Ticket from "./Ticket.jsx"
 import axios from "axios";
 
 export default class App extends React.Component {
@@ -86,19 +87,21 @@ export default class App extends React.Component {
     const { view, items, users, basket, user } = this.state;
 
     if (view === "home") {
-      return <Home changeView={this.changeView} items={items}  />;
+      return <Home changeView={this.changeView} items={items} />;
     } else if (view === "login") {
-      return <Login changeView={this.changeView}  />;
+      return <Login changeView={this.changeView} />;
     } else if (view === "sign up") {
-      return <Signup changeView={this.changeView}  />;
-    } else if (view === "field"){
-      return <Field  changeView={this.changeView} user={user}/>;
-    } else if (view === "profile" && user !== null){
+      return <Signup changeView={this.changeView} />;
+    } else if (view === "field") {
+      return <Field  changeView={this.changeView} user={user} />;
+    } else if (view === "profile") {
       return <Profile changeView={this.changeView} user={user} items={items} disconnect={this.disconnect} />;
     } else if (view === "search") {
-      return <Search changeView={this.changeView} filteredItems={filteredItems} basket={basket}/>
+      return <Search changeView={this.changeView} filteredItems={filteredItems} basket={basket} />
+    } else if (view === "basket") {
+     return <Basket changeView={this.changeView} basket={basket} />
     } else {
-     return <Basket basket={basket}/>
+      return <Ticket changeView={this.changeView} basket={this.state.basket} />
     }
   }
 
