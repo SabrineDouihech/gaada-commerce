@@ -19,7 +19,10 @@ const Signup=(props)=>{
             email
           })
           .then(response => {
-            console.log(response);
+              setUser(response.data)
+              setLoggedin(true)
+              console.log(response, loggedin, user);
+            props.changeView
           });
     }
 

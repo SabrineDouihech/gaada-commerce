@@ -50,7 +50,17 @@ app.post('/signup', function(req, res){
   })
 })
 
-
+app.post('/login', (req, res)=>{
+  const email = req.body.email
+  const password = req.body.password
+  User.findOne({email, password}, (err, result)=>{
+   if(!result){
+    res.status(400).send(err)
+   } else {
+     res.send(result)
+   }
+  })
+})
 
 app.post('/api/item', async (req, res) =>{
   try{

@@ -1,8 +1,8 @@
+import axios from 'axios';
 import React, {useState} from 'react';
 import Profile from './Profile.jsx';
 
 const Login=(props)=>{
-    // console.log(props.users, "users login");
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -11,12 +11,21 @@ const Login=(props)=>{
 
     const login = (e)=>{
         e.preventDefault();
-     props.users.map(ele => {
-         if(ele.password === password && ele.email === email) {
-             console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-         } else {console.log("wrong password/email !")}
-     })
+        axios.post('/login',{email, password})
+        .then(response => {
+            setUser(response.data)
+            // return <Profile/>
+            props.changeView
+        }).catch(err => {
+            console.log(err);
+        })
     }
+    console.log( user , "user data");
+    //  props.users.map(ele => {
+    //      if(ele.password === password && ele.email === email) {
+    //          console.log("correct password");
+    //      } else console.log("wrong password")
+    //  })
 
     return(
         <div>
@@ -33,6 +42,7 @@ const Login=(props)=>{
                 <br />
                 <button id="loginBtn" 
                 onClick={login}
+                // onClick={()=>{ return <Profile />}}
                 > Login </button>
                 <button onClick={props.goBack} >Exit</button>
                 <br />

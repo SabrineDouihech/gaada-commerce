@@ -59,7 +59,7 @@ export default class App extends React.Component {
     if (view === "home") {
       return <Home items={items} basket={basket} changeView={this.changeView} />;
     } else if (view === "login") {
-      return <Login users={users} handleChange={()=>{this.changeView('profile')}} />;
+      return <Login users={users} changeView={()=>{this.changeView('profile')}} />;
     } else if (view === "sign up") {
       return <Signup handleChange={()=>{this.changeView('field')}}  />;
     } else if (view === "field"){
