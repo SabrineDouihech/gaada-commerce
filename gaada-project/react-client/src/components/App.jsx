@@ -15,17 +15,22 @@ export default class App extends React.Component {
       items: [],
       users: [],
       view: "home",
-      user:{},
+      user: null,
       basket: [],
+      serachType:"",
       };
-    this.changeView = this.changeView.bind(this);
-    this.getItems = this.getItems.bind(this);
-    this.getUsers = this.getUsers.bind(this);
+      this.loggedinUser = this.loggedinUser.bind(this);
+      this.changeView = this.changeView.bind(this);
+      this.getItems = this.getItems.bind(this);
+      this.getUsers = this.getUsers.bind(this);
+      this.handleChange = this.handleChange.bind(this);
+      this.disconnect = this.disconnect.bind(this);
   }
 
   componentDidMount() {
     this.getItems();
     this.getUsers()
+    this.loggedinUser()
   }
 
   getUsers () {
@@ -46,6 +51,18 @@ export default class App extends React.Component {
     })
   }
 
+  loggedinUser() {
+    axios.get('/user/loggedin').then(result =>{
+      this.setState({user : result.data})
+      console.log(this.state.user, "actif user");
+    })
+  }
+
+  disconnect() {
+    axios.get('/user/disconnect').then(() =>{
+      this.setState({user : null})
+    })
+  }
 
   changeView(option) {
       this.setState({
@@ -53,19 +70,28 @@ export default class App extends React.Component {
       });
   }
 
+  handleChange(e){
+    this.setState({searchType: e.target.value})
+  }
+
   renderView() {
+
+    const filteredItems = this.state.items.filter((item)=>{
+      return item.itemType.includes(this.state.searchType);
+    })
+//console.log(filteredItems)
     const { view, items, users, basket, user } = this.state;
 
     if (view === "home") {
-      return <Home items={items} basket={basket} changeView={this.changeView} />;
+      return <Home changeView={this.changeView} filteredItems={filteredItems} basket={basket}  />;
     } else if (view === "login") {
-      return <Login users={users} handleChange={()=>{this.changeView('profile')}} />;
+      return <Login changeView={this.changeView}  />;
     } else if (view === "sign up") {
-      return <Signup handleChange={()=>{this.changeView('field')}}  />;
+      return <Signup changeView={this.changeView}  />;
     } else if (view === "field"){
       return <Field  changeView={this.changeView} user={user}/>;
-    } else if (view === "profil"){
-      return <Profile users={users} items={items} />
+    } else if (view === "profile" && user !== null){
+      return <Profile changeView={this.changeView} user={user} items={items} disconnect={this.disconnect} />;
     } else{
      return <Basket basket={basket}/>
     }
@@ -81,10 +107,17 @@ export default class App extends React.Component {
           className="logo"
           style={{cursor:"pointer"}}
           onClick={() => this.changeView("home")}> Ga3da commerce </span>
-            {/* <span>
-              <input type="text" />
-              <button>search</button>
-            </span> */}
+          <span>
+              <input type="text" value="submit" placeholder="Search..." 
+              onChange={this.handleChange} 
+              value={this.state.searchType}/>
+            </span>
+            <span
+            className={
+              this.state.view === "home" ? "nav-selected" : "nav-unselected"
+            }
+            style={{cursor:"pointer"}}
+            onClick={() => this.changeView("profile")}> Profile </span>
           <span
             className={
               this.state.view === "home" ? "nav-selected" : "nav-unselected"

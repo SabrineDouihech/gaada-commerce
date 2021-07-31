@@ -9,13 +9,17 @@ export default class Profile extends React.Component {
   render() {
     return (
       <div>
-        {console.log('--------------------profile',this.props.users[0])}
-        <div><img src={this.props.users[0].image}/>
-        <h5>{this.props.users[0].username}</h5>
-        <h6>{this.props.users[0].email}</h6></div>
         <div>
+          <span id="disconnectbtn" style={{cursor:"pointer"}} onClick={this.props.disconnect}> Disconnect </span>
+          <h5>{this.props.user.username}</h5  >
+          <h6>{this.props.user.email}</h6>
+        </div>
+        <div>
+          <Field/>
+        </div>
+      <div>
         <Create/>
-</div>
+      </div>
 
 <div className="card">
   {

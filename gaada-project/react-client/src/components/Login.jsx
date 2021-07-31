@@ -6,30 +6,27 @@ const Login=(props)=>{
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [user, setUser] = useState({});
   
 
+   
+
     const login = (e)=>{
-        e.preventDefault();
-        axios.post('/login',{email, password})
-        .then(response => {
-            setUser(response.data)
-            // return <Profile/>
-            props.changeView
+        // e.preventDefault();
+        axios.post('/login', {email, password})
+        .then(() => {
+            props.changeView('field')
         }).catch(err => {
-            console.log(err);
+            console.log(err, "wrong pasword/username!");
         })
     }
-    console.log( user , "user data");
-    //  props.users.map(ele => {
-    //      if(ele.password === password && ele.email === email) {
-    //          console.log("correct password");
-    //      } else console.log("wrong password")
-    //  })
+
 
     return(
         <div>
-            <form id="loginForm" action="login">
+            <form id="loginForm" onSubmit={()=>{
+                login();
+                props.changeView
+            }}>
                 <h3>Login</h3>
                 <br />
                 <label id="emailLabel"> Email </label> <br />
@@ -40,16 +37,13 @@ const Login=(props)=>{
                 <input id="passwordInput" type="password" placeholder="enter your password"
                 onChange={(e)=>{ setPassword(e.target.value)}} />
                 <br />
-                <button id="loginBtn" 
-                onClick={login}
-                // onClick={()=>{ return <Profile />}}
-                > Login </button>
-                <button onClick={props.goBack} >Exit</button>
+                <button id="loginBtn" type="submit"> Login </button>
+                <button onClick={()=>{props.changeView('home')}} >Exit</button>
                 <br />
                 <br />
                 <h6>forgot password? </h6>
                 <br />
-                <h6>Dont have an account ? Register here.</h6>
+                <h6>Dont have an account ? </h6> <h6 style={{cursor:"pointer"}} onClick={()=>{props.changeView('sign up')}}>Register here.</h6>
             </form>
         </div>
     )

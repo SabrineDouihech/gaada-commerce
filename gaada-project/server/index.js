@@ -38,9 +38,10 @@ app.get('/users', (req, res)=>{
 
 app.post('/signup', function(req, res){
   User.create(
-  {name: req.body.username,
+  {username: req.body.username,
    password: req.body.password,
-   email: req.body.email
+   email: req.body.email,
+   loggedin: req.body.loggedin
   }, function(err, result){
     if(err){
       res.status(400).send()
@@ -53,7 +54,7 @@ app.post('/signup', function(req, res){
 app.post('/login', (req, res)=>{
   const email = req.body.email
   const password = req.body.password
-  User.findOne({email, password}, (err, result)=>{
+  User.findOneAndUpdate({email, password},{loggedin:true}, (err, result)=>{
    if(!result){
     res.status(400).send(err)
    } else {
@@ -110,7 +111,25 @@ res.send(item)
 })
 
 
+app.get('/user/loggedin', (req, res)=>{
+  User.findOne({loggedin: true}, function(err, result){
+    if (err){
+      res.send(err)
+    } else {
+      res.send(result)
+    }
+  })
+})
 
+app.get('/user/disconnect', (req, res)=>{
+  User.findOneAndUpdate({loggedin: true}, {loggedin: false},(err, result)=>{
+    if (err){
+      res.send(err)
+    } else {
+      res.send(result)
+    }
+  })
+})
 
 app.get('/items/:type', (req, res)=>{
   Item.find({itemType: req.params.type}, (err, result)=>{

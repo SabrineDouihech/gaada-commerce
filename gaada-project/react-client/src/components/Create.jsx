@@ -65,7 +65,7 @@ add(){
 
 render(){
     return(
-        <div>
+        <div id="create" >
             <label placeholder="Item name" >Item name</label> <br />
             <input text='text' onChange={(e)=>this.handleName(e)} />
             <br />
@@ -85,7 +85,6 @@ render(){
             <input text='number' onChange={(e)=>this.handleQntt(e)}/>
             <br />
             <button onClick={()=>this.add()}>Add it</button>
-            <button onClick={()=>this.add()}>Update</button>
          <div>
          </div>
         </div>

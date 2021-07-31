@@ -6,7 +6,6 @@ const Signup=(props)=>{
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [user, setUser] = useState({});
     const [loggedin, setLoggedin] = useState(false);
 
 
@@ -16,19 +15,18 @@ const Signup=(props)=>{
           .post("/signup", {
             username,
             password,
-            email
+            email,
+            loggedin
           })
-          .then(response => {
-              setUser(response.data)
-              setLoggedin(true)
-              console.log(response, loggedin, user);
-            props.changeView
+          .then(() => {
+              props.changeView('home')
+              setLoggedin(true);
           });
     }
 
     return(
         <div>
-            <form id="SignUpForm" action="SignUp">
+            <form id="SignUpForm" onSubmit={signup}>
                 <h3>Sign Up</h3>
                 <br />
                 <label id="nameLabel"> Name </label> <br />
@@ -53,12 +51,8 @@ const Signup=(props)=>{
                 />
                 <br />
                 <br />
-                <button id="signUpBtn"  
-                type='submit'
-                // onClick={signup}
-                onClick={signup}
-                >Sign Up</button>
-                <button onClick={props.goBack} >Exit</button>
+                <button id="signUpBtn" type='submit'> Sign Up </button>
+                <button onClick={()=>{props.changeView('home')}} >Exit</button>
             </form>
         </div>
     )
