@@ -131,6 +131,19 @@ app.get('/user/disconnect', (req, res)=>{
   })
 })
 
+app.post('/api/user/:id', (req, res) =>{
+
+  User.findOneAndUpdate({id: req.params._id}, {image: req.body.image},
+    function(err, result){
+      if(err){
+        res.status(400).send()
+      } else {
+        res.send(result)
+      }
+    }
+    )
+})
+
 app.get('/items/:type', (req, res)=>{
   Item.find({itemType: req.params.type}, (err, result)=>{
     if(err){

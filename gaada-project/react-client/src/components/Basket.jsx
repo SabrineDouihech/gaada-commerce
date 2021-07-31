@@ -8,30 +8,33 @@ class Basket extends React.Component {
     this.delete = this.delete.bind(this);
   }
 
-  delete(id) {
-    axios.delete(`/items/${id}`).then((res) => {
-      console.log(res);
-      location.reload();
-    });
+  delete() {
+    var arr = this.props.basket.shift()
+    this.setState({
+      basket : arr
+    })
+    location.reload();
   }
 
   render() {
-
     return (
-      <div id="basket">
+      <div>
+        {/* {console.log(props.basket)} */}
         {this.props.basket.map((elm, i) => (
           <div key={i}>
             <h4>{elm.itemName}</h4>
 
             <h4>{elm.price}</h4>
-            <button onClick={() => this.delete(elm._id)}> Delete </button>
+            <button onClick={() => this.delete()}>XX</button>
           </div>
         ))}
         <div>
-          <div>
-            <h3>Ko77 : </h3>
-            {this.props.basket.reduce((acc, elm, i) => acc + elm.price, 0)}$
-          </div>
+         
+          <button id="foot" onClick={() => this.props.changeView("ticket")}>
+            <button className="button-os">
+              <a href="#">Get Your Ticket</a>
+            </button>
+          </button>
         </div>
       </div>
     );
