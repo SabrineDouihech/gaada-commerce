@@ -4,8 +4,8 @@ var db = require("../database");
 var port = 3001
 var app = express();
 
-const jwt = require('jsonwebtoken');
-const bcrypt = require("bcrypt");
+
+
 
 const Item = require('../database/item.js')
 const User = require('../database/user.js')

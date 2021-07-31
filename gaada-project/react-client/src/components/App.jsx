@@ -7,6 +7,7 @@ import Field from "./Field.jsx";
 import Basket from "./Basket.jsx";
 import axios from "axios";
 
+
 export default class App extends React.Component {
   
   constructor(props) {
@@ -38,6 +39,7 @@ export default class App extends React.Component {
     
   }
   getItems() {
+    
     axios.get("/items").then((res) => {
       this.setState({ items: res.data });
       console.log(this.state.items, "items");
