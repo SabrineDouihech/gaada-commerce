@@ -8,7 +8,7 @@ class Home extends React.Component  {
   return (
     <div className="container">
       {/* {console.log('------------',this.props.changeView)} */}
-      {this.props.items.map((item, index) => (
+      {this.props.filteredItems.map((item, index) => (
         <ItemDetails item={item} key={index} changeView={this.props.changeView} basket={this.props.basket} />
       ))}
     </div>
