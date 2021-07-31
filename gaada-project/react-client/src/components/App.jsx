@@ -5,8 +5,8 @@ import Home from "./Home.jsx";
 import Profile from "./Profile.jsx";
 import Field from "./Field.jsx";
 import Basket from "./Basket.jsx";
+import Search from "./Search.jsx";  
 import axios from "axios";
-
 
 export default class App extends React.Component {
   
@@ -16,25 +16,22 @@ export default class App extends React.Component {
       items: [],
       users: [],
       view: "home",
-      user:{},
+      user: null,
       basket: [],
       serachType:"",
       };
-    this.changeView = this.changeView.bind(this);
-    this.getItems = this.getItems.bind(this);
-    this.getUsers = this.getUsers.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    
-  }
-
-
-  handleChange(e){
-    this.setState({searchType: e.target.value})
+      this.loggedinUser = this.loggedinUser.bind(this);
+      this.changeView = this.changeView.bind(this);
+      this.getItems = this.getItems.bind(this);
+      this.getUsers = this.getUsers.bind(this);
+      this.handleChange = this.handleChange.bind(this);
+      this.disconnect = this.disconnect.bind(this);
   }
 
   componentDidMount() {
     this.getItems();
     this.getUsers()
+    this.loggedinUser()
   }
 
   getUsers () {
@@ -46,7 +43,6 @@ export default class App extends React.Component {
     })
     
   }
-
   getItems() {
     axios.get("/items").then((res) => {
       this.setState({ items: res.data });
@@ -56,6 +52,20 @@ export default class App extends React.Component {
     })
   }
 
+  loggedinUser() {
+    axios.get('/user/loggedin').then(result =>{
+      this.setState({user : result.data})
+      console.log(this.state.user, "actif user");
+    })
+  }
+
+  disconnect() {
+    axios.get('/user/disconnect').then(() =>{
+      this.setState({user : null})
+    }).then(() =>{
+      this.changeView('home')
+    })
+  }
 
   changeView(option) {
       this.setState({
@@ -63,10 +73,9 @@ export default class App extends React.Component {
       });
   }
 
-// filtered(){
-  
-// }
-  
+  handleChange(e){
+    this.setState({searchType: e.target.value})
+  }
 
   renderView() {
 
@@ -77,16 +86,18 @@ export default class App extends React.Component {
     const { view, items, users, basket, user } = this.state;
 
     if (view === "home") {
-      return <Home filteredItems={filteredItems} basket={basket} changeView={this.changeView} />;
+      return <Home changeView={this.changeView} items={items}  />;
     } else if (view === "login") {
-      return <Login users={users} handleChange={()=>{this.changeView('profile')}} />;
+      return <Login changeView={this.changeView}  />;
     } else if (view === "sign up") {
-      return <Signup handleChange={()=>{this.changeView('field')}}  />;
+      return <Signup changeView={this.changeView}  />;
     } else if (view === "field"){
       return <Field  changeView={this.changeView} user={user}/>;
-    } else if (view === "profil"){
-      return <Profile users={users} items={items} />
-    } else{
+    } else if (view === "profile" && user !== null){
+      return <Profile changeView={this.changeView} user={user} items={items} disconnect={this.disconnect} />;
+    } else if (view === "search") {
+      return <Search changeView={this.changeView} filteredItems={filteredItems} basket={basket}/>
+    } else {
      return <Basket basket={basket}/>
     }
   }
@@ -101,10 +112,17 @@ export default class App extends React.Component {
           className="logo"
           style={{cursor:"pointer"}}
           onClick={() => this.changeView("home")}> Ga3da commerce </span>
-            <span>
-              <input type="text" placeholder="Search..." onChange={this.handleChange} value={this.state.searchType}/>
-              
+          <span>
+              <input onClick={() => this.changeView("search")} type="text" value="submit" placeholder="Search..." 
+              onChange={this.handleChange} 
+              value={this.state.searchType}/>
             </span>
+            <span
+            className={
+              this.state.view === "home" ? "nav-selected" : "nav-unselected"
+            }
+            style={{cursor:"pointer"}}
+            onClick={() => this.changeView("profile")}> Profile </span>
           <span
             className={
               this.state.view === "home" ? "nav-selected" : "nav-unselected"

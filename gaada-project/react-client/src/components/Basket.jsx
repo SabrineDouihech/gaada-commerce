@@ -18,13 +18,13 @@ class Basket extends React.Component {
   render() {
 
     return (
-      <div>
+      <div id="basket">
         {this.props.basket.map((elm, i) => (
           <div key={i}>
             <h4>{elm.itemName}</h4>
 
             <h4>{elm.price}</h4>
-            <button onClick={() => this.delete(elm._id)}>XX</button>
+            <button onClick={() => this.delete(elm._id)}> Delete </button>
           </div>
         ))}
         <div>

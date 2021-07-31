@@ -29,19 +29,13 @@ axios.put(`/api/user/${id}`, this.state)
   console.log(res)
 
 })
-.then(()=>{
-    this.props.changeView('profil')
-//  location.reload()
-
-})
 
 
 }
 
     render(){
         return(
-            <div>
-               
+            <div id="field">     
                 Your Image : <input type="text" onChange={(e)=>this.handleChangeImage(e)}/>
                 <button onClick={()=>this.userAdd()}>JOIN</button>
             </div>
