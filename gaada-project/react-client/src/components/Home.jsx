@@ -7,10 +7,16 @@ class Home extends React.Component  {
   render(){
   return (
     <div className="container">
-      {/* {console.log('------------',this.props.changeView)} */}
-      {this.props.filteredItems.map((item, index) => (
-        <ItemDetails item={item} key={index} changeView={this.props.changeView} basket={this.props.basket} />
-      ))}
+      {this.props.items.map((item, key)=>(
+        <div key={key}>
+        <img src={item.imageUrl} />
+        <h4> {item.itemName} </h4>
+        <h5> {item.itemType} </h5>
+        <h5> {item.price} </h5>
+        <h5> {item.quantity} </h5>
+        </div>)
+      )}
+      <button onClick={() =>this.props.changeView('home')} > Exit </button>
     </div>
   );
     }

@@ -1,21 +1,17 @@
 import React from 'react';
 import axios from 'axios';
-// import Profile from './Profile.jsx';
 
 export default class Field  extends React.Component {
   constructor(props){
       super(props)
       this.state={
           image:"",
-          user: this.props.user
       }
    
       this.handleChangeImage = this.handleChangeImage.bind(this)
-      this.userAdd = this.userAdd.bind(this)
+      this.addImage = this.addImage.bind(this)
   }
-// componentWillUnmount(){
-//     this.userAdd()
-// }
+
 
 handleChangeImage(e){
     this.setState({
@@ -23,17 +19,15 @@ handleChangeImage(e){
     })
 }
 
-userAdd(id){
-axios.put(`/api/user/${id}`, this.state)
-.then((res)=>{
-  console.log(res)
-
-})
-.then(()=>{
-    this.props.changeView('profil')
-//  location.reload()
-
-})
+addImage(){
+    axios.post(`/api/user/${this.props.user.id}`, this.state)
+    .then((res)=>{
+      console.log(res)
+    location.reload()
+    })
+    .then(()=>{
+        this.props.changeView('profil')
+    })
 
 
 }
@@ -41,9 +35,29 @@ axios.put(`/api/user/${id}`, this.state)
     render(){
         return(
             <div>
-               
-                Your Image : <input type="text" onChange={(e)=>this.handleChangeImage(e)}/>
-                <button onClick={()=>this.userAdd()}>JOIN</button>
+                {console.log(this.props) }
+               <link
+          href="https://fonts.googleapis.com/css?family=Roboto"
+          rel="stylesheet"
+        />
+        <div className="form__group">
+          <input
+            type="text"
+            className="form__input"
+            id="name"
+            placeholder="Your Image "
+            required=""
+            onChange={(e)=>this.handleChangeImage(e)}
+          />
+          <label htmlFor="name" className="form__label">
+          Your Image  
+          </label>
+          </div>
+          <button id="foot" onClick={this.addImage} >
+            <button className="button-os">
+              <a href="#">JOIN</a>
+            </button>
+          </button>
             </div>
         )
     }

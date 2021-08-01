@@ -8,15 +8,15 @@ class Basket extends React.Component {
     this.delete = this.delete.bind(this);
   }
 
-  delete(id) {
-    axios.delete(`/items/${id}`).then((res) => {
-      console.log(res);
-      location.reload();
-    });
+  delete() {
+    var arr = this.props.basket.shift()
+    this.setState({
+      basket : arr
+    })
+    location.reload();
   }
 
   render() {
-
     return (
       <div className="container">
         {this.props.basket.map((elm, i) => (
@@ -33,10 +33,12 @@ class Basket extends React.Component {
           </div>
         ))}
         <div>
-          <div>
-            <h3>Ko77 : </h3>
-            {this.props.basket.reduce((acc, elm, i) => acc + elm.price, 0)}$
-          </div>
+         
+          <button id="foot" onClick={() => this.props.changeView("ticket")}>
+            <button className="button-os">
+              <a href="#">Get Your Ticket</a>
+            </button>
+          </button>
         </div>
       </div>
     );

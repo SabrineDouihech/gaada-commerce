@@ -1,95 +1,144 @@
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
 
-export default class Create extends React.Component{
-constructor(){
-    super()
-    this.state={
-        itemName:"",
-        itemDescription:"",
-        itemType:"",
-        imageUrl:"",
-        price:"",
-        quantity:"",
-        items:[]
-    }
-    this.handleName = this.handleName.bind(this)
-    this.handleDesc = this.handleDesc.bind(this)
-    this.handleType = this.handleType.bind(this)
-    this.handleImg = this.handleImg.bind(this)
-    this.handlePrc = this.handlePrc.bind(this)
-    this.handleQntt = this.handleQntt.bind(this)
-    this.add = this.add.bind(this)
-}
+export default class Create extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      itemName: "",
+      itemDescription: "",
+      itemType: "",
+      imageUrl: "",
+      price: "",
+      quantity: "",
+      items: [],
+    };
+    this.handleName = this.handleName.bind(this);
+    this.handleDesc = this.handleDesc.bind(this);
+    this.handleType = this.handleType.bind(this);
+    this.handleImg = this.handleImg.bind(this);
+    this.handlePrc = this.handlePrc.bind(this);
+    this.handleQntt = this.handleQntt.bind(this);
+    this.add = this.add.bind(this);
+  }
 
-handleName(e){
+  handleName(e) {
     this.setState({
-        itemName: e.target.value
-    })
-}
-handleDesc(e){
+      itemName: e.target.value,
+    });
+  }
+  handleDesc(e) {
     this.setState({
-        itemDescription: e.target.value
-    })
-}
-handleType(e){
+      itemDescription: e.target.value,
+    });
+  }
+  handleType(e) {
     this.setState({
-        itemType: e.target.value
-    })
-}
-handleImg(e){
+      itemType: e.target.value,
+    });
+  }
+  handleImg(e) {
     this.setState({
-        imageUrl: e.target.value
-    })
-}
-handlePrc(e){
+      imageUrl: e.target.value,
+    });
+  }
+  handlePrc(e) {
     this.setState({
-        price: e.target.value
-    })
-}
-handleQntt(e){
+      price: e.target.value,
+    });
+  }
+  handleQntt(e) {
     this.setState({
-        quantity: e.target.value
-    })
-}
+      quantity: e.target.value,
+    });
+  }
 
-add(){
-    axios.post('/api/item', this.state)
-    .then((res)=>{
-        console.log(res)
-        location.reload()
-    })
-}
+  add() {
+    axios.post("/api/item", this.state).then((res) => {
+      console.log(res);
+      location.reload();
+    });
+  }
 
-
-
-render(){
-    return(
-        <div>
-            <label placeholder="Item name" >Item name</label> <br />
-            <input text='text' onChange={(e)=>this.handleName(e)} />
-            <br />
-            <label placeholder="Item descrition" >Item descrition</label> <br />
-            <input text='text' onChange={(e)=>this.handleDesc(e)}/>
-            <br />
-            <label placeholder="Item type" >Item type</label> <br />
-            <input text='text' onChange={(e)=>this.handleType(e)}/>
-            <br />
-            <label placeholder="Item picture" >Item picture</label> <br />
-            <input text='text' onChange={(e)=>this.handleImg(e)}/>
-            <br />
-            <label placeholder="Item price" >Item price</label> <br />
-            <input text='text' onChange={(e)=>this.handlePrc(e)}/>
-            <br />
-            <label placeholder="Item quantity" >Item quantity</label> <br />
-            <input text='number' onChange={(e)=>this.handleQntt(e)}/>
-            <br />
-            <button onClick={()=>this.add()}>Add it</button>
-            <button onClick={()=>this.add()}>Update</button>
-         <div>
-         </div>
+  render() {
+    return (
+      <div>
+          <h2>Post a product</h2><br></br>
+        <link
+          href="https://fonts.googleapis.com/css?family=Roboto"
+          rel="stylesheet"
+        />
+        <div className="form__group">
+          <input
+            type="text"
+            className="form__input"
+            id="name"
+            placeholder="Full name"
+            required=""
+            onChange={(e) => this.handleName(e)}
+          />
+          <label htmlFor="name" className="form__label">
+             Name
+          </label>
+          <input
+            type="text"
+            className="form__input"
+            id="name"
+            placeholder="Description"
+            required=""
+            onChange={(e) => this.handleDesc(e)}
+          />
+          <label htmlFor="name" className="form__label">
+             Description
+          </label>
+          <input
+            type="text"
+            className="form__input"
+            id="name"
+            placeholder="Type"
+            required=""
+            onChange={(e) => this.handleType(e)}
+          />
+          <label htmlFor="name" className="form__label">
+             Type
+          </label>
+          <input
+            type="text"
+            className="form__input"
+            id="name"
+            placeholder="Image"
+            required=""
+            onChange={(e) => this.handleImg(e)} 
+          />
+          <label htmlFor="name" className="form__label">
+             Image
+          </label>
+          <input
+            type="text"
+            className="form__input"
+            id="name"
+            placeholder="Price"
+            required=""
+            onChange={(e) => this.handlePrc(e)}
+          />
+          <label htmlFor="name" className="form__label">
+             Price
+          </label>
+          <input
+            type="text"
+            className="form__input"
+            id="name"
+            placeholder="Quantity"
+            required=""
+            onChange={(e) => this.handleQntt(e)}
+          />
+          <label htmlFor="name" className="form__label">
+          Quantity
+          </label>
         </div>
-    )
-}
 
+        <button onClick={() => this.add()}>Add it</button>
+      </div>
+    );
+  }
 }
