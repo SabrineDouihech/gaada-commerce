@@ -18,13 +18,18 @@ class Basket extends React.Component {
   render() {
 
     return (
-      <div>
+      <div className="container">
         {this.props.basket.map((elm, i) => (
-          <div key={i}>
-            <h4>{elm.itemName}</h4>
+          <div key={i} className="card">
+            <img className="card-image" src={elm.imageUrl} alt="item image" />
 
-            <h4>{elm.price}</h4>
-            <button onClick={() => this.delete(elm._id)}>XX</button>
+              <div className="card-itemDetails">
+                <h4>{elm.itemName}</h4>
+                <h4>{elm.itemType}</h4>
+                <h4>{elm.itemDescription}</h4>
+                <h4>{elm.price}</h4>
+                <button onClick={() => this.delete(elm._id)}> Delete </button>
+            </div>
           </div>
         ))}
         <div>

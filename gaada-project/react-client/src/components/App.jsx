@@ -101,7 +101,7 @@ export default class App extends React.Component {
           className="logo"
           style={{cursor:"pointer"}}
           onClick={() => this.changeView("home")}> Ga3da commerce </span>
-            <span>
+            <span className="search">
               <input type="text" placeholder="Search..." onChange={this.handleChange} value={this.state.searchType}/>
               
             </span>
